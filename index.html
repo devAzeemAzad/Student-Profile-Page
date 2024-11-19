@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Student Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2>Student Profile</h2>
+        </div>
+        <div class="profile-form">
+            <form id="profile-form" action="#" method="POST">
+                <div class="profile-picture-container">
+                    <img id="profile-picture" src="./download.jpg" alt="Profile Picture">
+                    <label class="upload-btn">
+                        <input type="file" id="profile-picture-upload" accept="image/*">
+                        <span>Upload Picture</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" value="Azeem" placeholder="Enter your full name" required disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" value="Azeem09" placeholder="Enter your username" required disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" value="********" placeholder="Enter your password" required disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="Azeem09@gmail.com" placeholder="Enter your email" required disabled>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="edit-btn" class="edit-btn">Edit</button>
+                    <button type="submit" id="submit-btn" class="submit-btn hide">Submit</button>
+                    <button type="button" id="cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle input fields enabled/disabled
+        document.getElementById('edit-btn').addEventListener('click', function() {
+            const inputs = document.querySelectorAll('#profile-form input');
+            inputs.forEach(input => input.disabled = false);
+            document.getElementById('cancel-btn').style.display = 'inline-block';
+            this.style.display = 'none';
+            document.getElementById('submit-btn').classList.remove('hide');
+        });
+
+        // Function to disable input fields and reset changes
+        document.getElementById('cancel-btn').addEventListener('click', function() {
+            const inputs = document.querySelectorAll('#profile-form input');
+            inputs.forEach(input => input.disabled = true);
+            document.getElementById('edit-btn').style.display = 'inline-block';
+            this.style.display = 'none';
+            document.getElementById('submit-btn').classList.add('hide');
+        });
+
+        // Function to handle form submission
+        document.getElementById('profile-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Form submitted successfully!');
+        });
+
+        // Function to handle profile picture upload
+        document.getElementById('profile-picture-upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profile-picture').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
